@@ -1,1 +1,36 @@
 <h1>Bureau</h1>
+
+<div class="row mt-4" id="office-form">
+    <div class="col-12">
+        <form>
+            <input type="hidden" class="form-control" name="id">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom du bureau</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <button type="button" class="btn btn-danger" onclick="office.toggleForm()">Annuler</button>
+            <button type="submit" class="btn btn-primary" onclick="office.save(event)">Envoyer</button>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="row mt-4" id="container-list">
+    <div class="col-12 d-flex flex-row-reverse">
+        <button class="btn btn-success" onclick="office.edit()">Créer un bureau</button>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom du bureau</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

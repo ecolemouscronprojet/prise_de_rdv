@@ -1,6 +1,7 @@
 const app = {
-    defaultPage: 'home',
+    defaultPage: 'office',
     templates: new Map(),
+    controllers: {},
     content: document.getElementById('app'),
 };
 
@@ -12,6 +13,7 @@ app.init = function () {
     });
 
     this.navigate(this.defaultPage);
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
 };
 
 app.navigate = (path) => {
@@ -26,6 +28,11 @@ app.displayTpl = async (tpl) => {
     }
     const _tpl = app.templates.get(tpl);
     app.content.innerHTML = _tpl;
+    // INIT controller
+    if(app.controllers[tpl] != null) {
+        app.controllers[tpl].init();
+    }
+
 }
 
 app.loadTemplate = function (tpl) {
