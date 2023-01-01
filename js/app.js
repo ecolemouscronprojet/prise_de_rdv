@@ -6,7 +6,6 @@ const app = {
     content: document.getElementById('app'),
 };
 
-
 app.init = function () {
     window.addEventListener('hashchange', () => {
         const tplName = window.location.hash.slice(1);
