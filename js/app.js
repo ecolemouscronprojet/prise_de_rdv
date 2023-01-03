@@ -1,5 +1,5 @@
 const app = {
-    defaultPage: 'office',
+    defaultPage: 'office-availability',
     api: 'http://localhost:3005',
     templates: new Map(),
     controllers: {},
@@ -29,8 +29,9 @@ app.displayTpl = async (tpl) => {
     const _tpl = app.templates.get(tpl);
     app.content.innerHTML = _tpl;
     // INIT controller
-    if(app.controllers[tpl] != null) {
-        app.controllers[tpl].init();
+    const tplCamelCase = tpl.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+    if(app.controllers[tplCamelCase] != null) {
+        app.controllers[tplCamelCase].init();
     }
 
 }
