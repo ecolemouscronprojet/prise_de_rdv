@@ -1,3 +1,14 @@
 #office-form, #officeAvailability-form {
     display: none;
 }
+
+
+.card-img-top {
+    width: 30%;
+}
+
+#container-list .card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

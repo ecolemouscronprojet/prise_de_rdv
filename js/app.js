@@ -1,8 +1,9 @@
 const app = {
-    defaultPage: 'office-availability',
+    defaultPage: 'office-detail',
     api: 'http://localhost:3005',
     templates: new Map(),
     controllers: {},
+    currentId: 'HELLLO',
     content: document.getElementById('app'),
 };
 
@@ -30,6 +31,8 @@ app.displayTpl = async (tpl) => {
     app.content.innerHTML = _tpl;
     // INIT controller
     const tplCamelCase = tpl.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+    console.log('tplCamelCase', tplCamelCase);
+    console.log(app.controllers);
     if(app.controllers[tplCamelCase] != null) {
         app.controllers[tplCamelCase].init();
     }

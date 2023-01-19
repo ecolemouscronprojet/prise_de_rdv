@@ -5,7 +5,7 @@ const office = {
 office.init = async function () {
     // get DOM elements
 
-    office.tableContent = document.querySelector('#container-list table tbody');
+    office.containerCard = document.querySelector('#container-card');
 
     office.data = await office.getAll().catch(() => {
             alert('Impossible de récupérer les bureaux');
@@ -19,18 +19,22 @@ office.renderTable = () => {
     let content = '';
     office.data.forEach((e, index) => {
         content += `
-        <tr>
-            <td>${e.id}</td>
-            <td>${e.name}</td>
-            <td>
-                <button class="btn btn-primary" onclick="office.edit(${index})">M</button>
-                <button class="btn btn-danger" onclick="office.remove(${index})">S</button>
-            </td>
-        </tr>
+        <div class="col-4 mt-4">
+            <div class="card">
+                <img src="images/office.png" class="card-img-top" >
+                <div class="card-body">
+                <h5 class="card-title">${e.name}</h5>
+                <p class="card-text">
+                    mettre ici description
+                </p>
+                <a href="#" class="btn btn-primary" onclick="office.edit(${index})" >Consultation</a>
+                </div>
+            </div>    
+        </div>
         `;
     });
 
-    office.tableContent.innerHTML = content;
+   office.containerCard.innerHTML = content;
 }
 
 office.toggleForm = () => {

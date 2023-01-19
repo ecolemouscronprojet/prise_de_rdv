@@ -45,6 +45,7 @@ gulp.task('app-js', () => {
       'js/app.js',  
       'js/office.js', 
       'js/office-availability.js', 
+      'js/office-detail.js', 
     ])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/js'))
