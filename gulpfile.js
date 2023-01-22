@@ -8,7 +8,7 @@ gulp.task('serve', () => {
     });
 
    gulp.watch('**/*.html').on('change', browserSync.reload); 
-   gulp.watch('css/*.css').on('change', browserSync.reload); 
+   gulp.watch('css/*.css').on('change', gulp.series('app-css', browserSync.reload)); 
    gulp.watch('js/*.js').on('change', gulp.series('app-js', browserSync.reload)); 
 });
 
@@ -45,6 +45,7 @@ gulp.task('app-js', () => {
       'js/app.js',  
       'js/office.js', 
       'js/office-availability.js', 
+      'js/office-detail.js', 
     ])
     .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/js'))

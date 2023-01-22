@@ -1,3 +1,18 @@
 #office-form, #officeAvailability-form {
     display: none;
 }
+
+.desktop-img {
+    width: 30%
+}
+
+#container-list .card, #card-office-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#officeId{
+    font-size: 20px;
+    font-weight: bold;
+}
