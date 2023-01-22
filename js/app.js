@@ -1,9 +1,10 @@
 const app = {
-    defaultPage: 'office-availability',
+    defaultPage: 'office',
     api: 'http://localhost:3005',
     templates: new Map(),
     controllers: {},
     content: document.getElementById('app'),
+    currentId: null,
 };
 
 app.init = function () {
