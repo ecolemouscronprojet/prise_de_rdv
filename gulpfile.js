@@ -33,7 +33,8 @@ gulp.task('app-css', () => {
 
 gulp.task('vendor-js', () => {
     return gulp.src([
-      'node_modules/jquery/dist/jquery.min.js'  
+      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/bootstrap/dist/js/bootstrap.min.js'  
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/js'))
