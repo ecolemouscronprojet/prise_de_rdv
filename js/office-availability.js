@@ -1,21 +1,11 @@
 const officeAvailability = {
-    data: [],
     offices: [],
 };
 // #container-list
 //officeAvailability.edit
 
 officeAvailability.init = async function () {
-    const officeId = $('#officeId');
-    officeAvailability.offices = await office.getAll();
-
-    officeId.append(officeAvailability.offices.map(o => `<option value="${o.id}">${o.name}</option>`).join(''))
-
-    officeAvailability.data = await officeAvailability.getAll().catch(() => {
-        alert('Impossible de récupérer les disponibilités des bureaux');
-        return [];
-    });
-
+    $('input[name="officeId"]').val(app.currentId);
 }
 
 
@@ -28,12 +18,11 @@ officeAvailability.edit = (index) => {
 
 
 officeAvailability.fillForm = (index) => {
-    const record = officeAvailability.data[index];
+    const record = {};
 
     console.log(record);
     if(record != null) {
         $('input[name="id"]').val(record.id);
-        $('select[name="officeId"]').val(record.officeId);
         $('input[name="startDate"]').val(record.startDate);
         $('input[name="endDate"]').val(record.endDate);
         $('input[name="slotDuration"]').val(record.slotDuration);
@@ -46,7 +35,7 @@ officeAvailability.fillForm = (index) => {
 officeAvailability.save = async (event) => {
     event.preventDefault();
     const id = $('input[name="id"]').val();
-    const officeId = $('select[name="officeId"]').val();
+    const officeId = $('input[name="officeId"]').val();
     const startDate = $('input[name="startDate"]').val();
     const endDate = $('input[name="endDate"]').val();
     const slotDuration = $('input[name="slotDuration"]').val();
@@ -61,7 +50,7 @@ officeAvailability.save = async (event) => {
         return;
     }
 
-    const record = officeAvailability.data.find(d => d.id == id);
+    const record = null;
     // EDITION
     try {
         if (record) {
@@ -91,8 +80,8 @@ officeAvailability.save = async (event) => {
                     slotDuration,
                   }
             })
-            officeAvailability.data.push(officeAvailabilitySaved);
         }
+        app.navigate(`office-detail`);
     } catch (e) {
         if(e.responseJSON && e.responseJSON.error) {
             alert(e.responseJSON.error);
