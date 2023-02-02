@@ -9,6 +9,7 @@ officeAvailability.init = async function () {
     $('input[name="officeId"]').val(app.currentId);
     
     officeAvailability.availability = await $.get(`${app.api}/office-availability/${app.secondCurrentId}`);
+    officeAvailability.fillForm(officeAvailability.availability);
 }
 
 
@@ -20,18 +21,13 @@ officeAvailability.edit = (index) => {
 };
 
 
-officeAvailability.fillForm = (index) => {
-    const record = {};
-
-    console.log(record);
+officeAvailability.fillForm = (record) => {
     if(record != null) {
         $('input[name="id"]').val(record.id);
         $('input[name="startDate"]').val(record.startDate);
         $('input[name="endDate"]').val(record.endDate);
         $('input[name="slotDuration"]').val(record.slotDuration);
     }
-
-    
 };
 
 
