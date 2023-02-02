@@ -7,14 +7,16 @@ const officeDetail = {
 officeDetail.init = async function () {
    if(!app.currentId){
     app.navigate('office');
+    return;
    }
    officeDetail.availabilitiesContent = document.querySelector('#container-list-detail tbody');
    
-   
    // AJAX
    const office = await app.controllers.office.get(app.currentId);
-   officeDetail.dataAvailabilities = await app.controllers.officeAvailability.getAll();
-   
+   officeDetail.dataAvailabilities = await app.controllers.officeAvailability.getAll().catch(() => []);
+   officeDetail.dataAvailabilities = officeDetail.dataAvailabilities.filter(a => a.officeId === app.currentId)
+
+   console.log(officeDetail.dataAvailabilities);
    document.querySelector('#card-office-detail .card-title').innerHTML = office.name
 
    //RENDER TABLE
@@ -45,7 +47,6 @@ officeDetail.renderTable = () => {
         `;
     });
 
-    console.log('content', content);
    officeDetail.availabilitiesContent.innerHTML = content;
 }
 
