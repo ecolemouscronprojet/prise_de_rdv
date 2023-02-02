@@ -2,11 +2,11 @@ const officeAvailability = {
     data: [],
     offices: [],
 };
-
+// #container-list
+//officeAvailability.edit
 
 officeAvailability.init = async function () {
     const officeId = $('#officeId');
-    office.tableContent = document.querySelector('#container-list table tbody');
     officeAvailability.offices = await office.getAll();
 
     officeId.append(officeAvailability.offices.map(o => `<option value="${o.id}">${o.name}</option>`).join(''))
@@ -16,47 +16,11 @@ officeAvailability.init = async function () {
         return [];
     });
 
-    officeAvailability.renderTable();
 }
 
 
-officeAvailability.renderTable = () => {
-    let content = '';
-
-    
-    const _office = officeAvailability.offices.reduce((acc, o) => {
-        acc[o.id] = o.name;
-
-        return acc;
-    }, {});
-
-
-    officeAvailability.data.forEach((e, index) => {
-        content += `
-        <tr>
-            <td>${_office[e.officeId] || 'N/A'}</td>
-            <td>${e.startDate}</td>
-            <td>${e.endDate}</td>
-            <td>${e.slotDuration}</td>
-            <td>
-                <button class="btn btn-primary" onclick="officeAvailability.edit(${index})">M</button>
-                <button class="btn btn-danger" onclick="officeAvailability.remove(${index})">S</button>
-            </td>
-        </tr>
-        `;
-    });
-
-    office.tableContent.innerHTML = content;
-}
-
-
-officeAvailability.toggleForm = () => {
-    $('#officeAvailability-form form input').val('');
-    $('#container-list, #officeAvailability-form').toggle();
-}
 
 officeAvailability.edit = (index) => {
-    officeAvailability.toggleForm();
     if (index !== undefined) {
        officeAvailability.fillForm(index);
     }
@@ -129,8 +93,6 @@ officeAvailability.save = async (event) => {
             })
             officeAvailability.data.push(officeAvailabilitySaved);
         }
-        officeAvailability.renderTable();
-        officeAvailability.toggleForm();
     } catch (e) {
         if(e.responseJSON && e.responseJSON.error) {
             alert(e.responseJSON.error);

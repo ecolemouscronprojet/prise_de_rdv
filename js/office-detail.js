@@ -22,6 +22,11 @@ officeDetail.init = async function () {
 }
 
 
+officeDetail.goToEditOfficeAvailability = function() {
+    app.navigate('office-availability');
+}
+
+
 
 officeDetail.renderTable = () => {
     let content = '';
