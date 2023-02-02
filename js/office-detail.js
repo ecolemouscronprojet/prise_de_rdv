@@ -23,7 +23,8 @@ officeDetail.init = async function () {
 }
 
 
-officeDetail.goToEditOfficeAvailability = function() {
+officeDetail.goToEditOfficeAvailability = function(id) {
+    app.secondCurrentId = id;
     app.navigate('office-availability');
 }
 
@@ -39,14 +40,33 @@ officeDetail.renderTable = () => {
             <td>${e.endDate}</td>
             <td>${e.slotDuration}</td>
             <td>
-                <button class="btn btn-primary" onclick="officeAvailability.edit(${index})">M</button>
-                <button class="btn btn-danger" onclick="officeAvailability.remove(${index})">S</button>
+                <button class="btn btn-primary" onclick="officeDetail.goToEditOfficeAvailability('${e.id}')">M</button>
+                <button class="btn btn-danger" onclick="officeDetail.remove(${index})">S</button>
             </td>
         </tr>
         `;
     });
 
    officeDetail.availabilitiesContent.innerHTML = content;
+}
+
+
+officeDetail.remove = async (index) => {
+    const record = officeDetail.dataAvailabilities[index];
+    if (record != null && confirm(`Voulez-vous vraiment supprimer cette disponibilité ?`)) {
+
+        try {
+            await $.ajax({
+                type: 'DELETE',
+                url: `${app.api}/office-availability/${record.id}`,
+            });
+            officeDetail.dataAvailabilities.splice(index, 1);
+            officeDetail.renderTable();
+        } catch (e) {
+            alert('Impossible de supprimer cette disponibilité !');
+        }
+
+    }
 }
 
 app.controllers.officeDetail = officeDetail;

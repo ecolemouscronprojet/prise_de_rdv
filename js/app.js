@@ -5,6 +5,7 @@ const app = {
     controllers: {},
     content: document.getElementById('app'),
     currentId: null,
+    secondCurrentId: null,
 };
 
 app.init = function () {

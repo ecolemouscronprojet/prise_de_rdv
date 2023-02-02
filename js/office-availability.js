@@ -1,11 +1,14 @@
 const officeAvailability = {
     offices: [],
+    availability: null
 };
 // #container-list
 //officeAvailability.edit
 
 officeAvailability.init = async function () {
     $('input[name="officeId"]').val(app.currentId);
+    
+    officeAvailability.availability = await $.get(`${app.api}/office-availability/${app.secondCurrentId}`);
 }
 
 
@@ -91,24 +94,6 @@ officeAvailability.save = async (event) => {
     }
 };
 
-
-officeAvailability.remove = async (index) => {
-    const record = officeAvailability.data[index];
-    if (record != null && confirm(`Voulez-vous vraiment supprimer cette disponibilité ?`)) {
-
-        try {
-            await $.ajax({
-                type: 'DELETE',
-                url: `${app.api}/office-availability/${record.id}`,
-            });
-            officeAvailability.data.splice(index, 1);
-            officeAvailability.renderTable();
-        } catch (e) {
-            alert('Impossible de supprimer cette disponibilité !');
-        }
-
-    }
-}
 
 officeAvailability.getAll = () => {
     return $.ajax({
