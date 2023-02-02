@@ -16,7 +16,6 @@ officeDetail.init = async function () {
    officeDetail.dataAvailabilities = await app.controllers.officeAvailability.getAll().catch(() => []);
    officeDetail.dataAvailabilities = officeDetail.dataAvailabilities.filter(a => a.officeId === app.currentId)
 
-   console.log(officeDetail.dataAvailabilities);
    document.querySelector('#card-office-detail .card-title').innerHTML = office.name
 
    //RENDER TABLE
